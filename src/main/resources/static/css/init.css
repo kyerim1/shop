@@ -36,6 +36,7 @@ a{
     width:65%;
     align-items: center;
     justify-content: space-evenly;
+    transition: width 1s;
 }
 
 #nav #sub-nav{
@@ -81,6 +82,7 @@ a{
     outline: none;
     width:0;
     border-bottom: 1px solid #555;
+    transition:all 1s;
 }
 #keyword.active{
     width:200px;
