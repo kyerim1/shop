@@ -6,6 +6,8 @@
 .formData{
     width:100%;
     position:relative;
+    border:1px solid #bbb;
+    padding:50px;
 }
 .formTitle{
     font-weight:700;
