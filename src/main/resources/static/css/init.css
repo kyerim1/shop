@@ -26,7 +26,7 @@ a{
     align-items: center;
 }
 #nav .logo{
-    background: url(/image/logo.png) no-repeat center;
+    background: url(../image/logo.png) no-repeat center;
     background-size: cover;
     width:200px;
     height:50px;
@@ -105,7 +105,7 @@ a{
     align-items: center;
 }
 .foot-logo .logoImg{
-    background: url(/image/logo.png) no-repeat center;
+    background: url(../image/logo.png) no-repeat center;
     background-size:contain ;
     width:200px;height:50px;
 }
@@ -116,3 +116,47 @@ a{
     padding:0 20px;
 }
 .copy{ padding-left:20px;}
+
+#Mnav{
+    display:none;
+}
+
+/*  화면 너비가 800 보다 작은경우 메뉴 모습 - 반응형  */
+
+@media screen and (max-width:800px){
+    #nav .navbar-menu{
+        display: none;
+    }
+    #Mnav{
+        display:block;
+        width:40%;
+    }
+    #nav #sub-nav{ width:calc( 100% - 40% - 200px);}
+    #Mnav .m-menu-icon{
+        text-align: center;
+        font-size:25px;
+        cursor: pointer;
+    }
+    #Mnav .m-menu-slide{
+        display: none;
+        position:absolute;
+        top:81px; left:0;
+        width:100%;
+        background: #fff;
+    }
+    #Mnav .m-menu-item{
+        background:#53a2fb;
+        border-bottom:1px solid #ddd;
+        color:#fff;
+    }
+    #Mnav .m-menu-title{
+        padding:20px;
+    }
+    #Mnav .m-menu-sub{ display:none;}
+    #Mnav .m-menu-sub a{
+        display:block;
+        background:#f77e7e;
+        color:#fff;
+        padding:4px 50px;
+    }
+}
