@@ -26,7 +26,7 @@ public class MemberController {
     // 회원가입 페이지 요청
     @GetMapping("/signUp")
     public String joinPage(Model model){
-        model.addAttribute("memberFrom", new MemberForm());
+        model.addAttribute("memberForm", new MemberForm());
         return "member/join";
     }
 
