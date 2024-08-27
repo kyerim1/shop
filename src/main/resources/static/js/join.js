@@ -28,13 +28,16 @@ $(function(){
         }
     });
 
+    let agree_pass=false;
+    $.each( $(".fieldError") , function(){
+        if( $(this).text() !='') agree_pass=true
+    });
+    if(agree_pass) joinShow();
+
      // 동의 버튼 클릭시 - 회원가입으로 이동 단, 필수는 모두 체크 되어야한다.
     $(".btn_agree").click(function(){
         if( $("#chk1").prop('checked') && $("#chk2").prop('checked') ){
-            $(".stage_arrow").fadeIn(1500);
-            $(".stage_b").fadeIn(1500);
-            $("#terms").fadeOut(1000);
-            $("#joinForm").fadeIn(2000);
+           joinShow();
         }else{
             alert("필수 항목 동의 하셔야 합니다.");
         }
@@ -45,3 +48,10 @@ $(function(){
     });
 
 });
+
+function joinShow(){
+    $(".stage_arrow").fadeIn(1500);
+    $(".stage_b").fadeIn(1500);
+    $("#terms").fadeOut(1000);
+    $("#joinForm").fadeIn(2000);
+}
