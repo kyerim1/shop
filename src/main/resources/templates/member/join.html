@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragment/main}">
+<head>
+    <meta charset="UTF-8">
+    <title layout:fragment="title">회원가입</title>
+
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" href="/css/join.css">
+    </th:block>
+    <th:block layout:fragment="script">
+        <script src="/js/join.js"></script>
+    </th:block>
+</head>
+<div layout:fragment="main" id="main">
+
+    <div id="joinWrap">
+
+        <div id="progress">
+            <p class="stage stage_a"><i class="bi bi-1-circle"></i>약관동의</p>
+            <b class="stage_arrow"><i class="bi bi-arrow-right"></i></b>
+            <p class="stage stage_b"><i class="bi bi-2-circle"></i>회원가입</p>
+        </div>
+
+        <div id="terms">
+            <h3>약관 동의</h3>
+            <div id="all_agree" class="agree">
+                <input type="checkbox" id="chk_all" name="chk_all" value="1">
+                <label for="chk_all">
+                    회원가입 약관에 모두 동의합니다.
+                </label>
+            </div>
+            <div id="use_terms">
+                <div class="agree">
+                    <input type="checkbox" id="chk1" name="chk1" value="1">
+                    <label for="chk1">
+                        이용약관 동의<span>(필수)</span>
+                    </label>
+                </div>
+                <textarea readonly>
+                    제 1조(목적) 이 약관은 업체 회사(전자상거래 사업자)가 운영하는 업체 쇼핑몰
+                    (이하 '몰'이라 한다)에서 제공하는 인터넷 관련 서비스(이하 '서비스'라 한다)를
+                    이용함에 있어 사이버 몰과 이용자의 권리 의무 및 책임 사항을 규정함을 목적으로 한다.
+                </textarea>
+            </div>
+            <div id="private_terms">
+                <div class="agree">
+                    <input type="checkbox" name="chk2" id="chk2" value="1">
+                    <label for="chk2">
+                        개인정보 수집 및 이용 동의<span>(필수)</span>
+                    </label>
+                </div>
+                <textarea readonly>
+                    개인정보처리방침
+                    [차례]
+                    1.총칙
+                    2.개인정보 수집에 대한 동의
+                    3.개인정보의 수집 및 이용목적
+                </textarea>
+            </div>
+            <div id="util_terms">
+                <div class="agree">
+                    <input type="checkbox" name="chk3" id="chk3" value="1">
+                    <label for="chk3">
+                        개인정보 활용 동의<span>(선택)</span>
+                    </label>
+                </div>
+                <textarea readonly>
+                    개인정보 활용 동의
+
+                    수집한 개인 정보를 다음과 같이 활용에 동의한다.
+                    1. 이벤트 목적( 상시 이벤트 결과에 활용)
+                    2. 보험. 은행. 스폰서. 에 제공의 목적
+                </textarea>
+            </div>
+            <div class="btn_terms">
+                <a href="" class="btn_cancel">취소</a>
+                <button type="button" class="btn_agree">동의</button>
+            </div>
+        </div>
+
+        <div id="joinForm">
+            <form method="post" action="/member/signUp" th:object="${memberForm}">
+                <div class="formData">
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</html>

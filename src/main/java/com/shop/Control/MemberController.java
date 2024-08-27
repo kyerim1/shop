@@ -1,5 +1,6 @@
 package com.shop.Control;
 
+import com.shop.Dto.MemberForm;
 import com.shop.Dto.MemberLogin;
 import com.shop.Service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,13 @@ public class MemberController {
     public String loginPage(Model model){
         model.addAttribute("memberLogin",new MemberLogin());
         return "member/login";
+    }
+
+    // 회원가입 페이지 요청
+    @GetMapping("/signUp")
+    public String joinPage(Model model){
+        model.addAttribute("memberFrom", new MemberForm());
+        return "member/join";
     }
 
 }

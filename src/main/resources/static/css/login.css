@@ -1,13 +1,14 @@
 #loginWrap{
-    margin:200px auto;
+    margin:150px auto 200px auto;
     width:400px;
     font-size:30px;
 }
 .formData{
     width:100%;
     position:relative;
-    border:1px solid #bbb;
+    border:1px solid #ccc;
     padding:50px;
+    border-radius:10px;
 }
 .formTitle{
     font-weight:700;
