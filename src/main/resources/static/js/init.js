@@ -1,6 +1,12 @@
 
 $(function(){
 
+    // 상단 로고 이미지 클릭시 메인 페이지 이동
+    $(".logo").click(function(){
+        location.href="/";
+    });
+
+
     // 화면 크기 800보다 작은경우 아이콘 클릭시
     $(".m-menu-icon").on("click",function(){
        $(".m-menu-slide").slideToggle();

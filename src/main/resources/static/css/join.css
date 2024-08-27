@@ -1,0 +1,52 @@
+
+/*  join.css  */
+
+#joinWrap{
+    width:700px;
+    margin:0 auto;
+    padding:100px 0;
+    position:relative;
+}
+#progress{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    column-gap:20px;
+    border-bottom:1px solid #aaa;
+    padding:10px 0;
+}
+#progress .stage_arrow{
+    display:none;
+    font-size:20px;
+}
+#progress .stage_b{ display:none; }
+
+#joinForm{
+
+}
+
+#terms{
+    width:100%; padding:30px 100px;
+}
+#terms h3{
+    padding:15px;
+    border-bottom:3px solid #555;
+}
+#terms textarea{
+    width:100%;
+    resize:none;
+    padding:20px;
+    height:150px;
+    border:1px solid #dcdcdc;
+    line-height:1.6em;
+    overflow:auto;
+}
+#terms .agree{
+    padding:20px 0;
+    border-bottom: 1px solid #aaa;
+}
+
+
+
+
+
