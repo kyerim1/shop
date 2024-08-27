@@ -16,6 +16,12 @@ $(function(){
     // 각 동의 체크 해제 또는 체크표시 에따른 모두 동의 체크 상태
     $(".chk").click(function(){
         if( $(this).prop('checked') ){
+            var isAll = true;
+            $.each( $(".chk"), function(){
+                if( !$(this).prop('checked') )
+                    isAll= false;
+            });
+            if( isAll ) $("#chk_all").prop('checked',true);
 
         }else{ // 하나라도  체크 해제 하면 모두동의 체크 해제
             $("#chk_all").prop('checked',false);
