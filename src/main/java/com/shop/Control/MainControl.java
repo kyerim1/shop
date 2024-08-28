@@ -11,4 +11,10 @@ public class MainControl {
     public String home(Model model){
         return "index";
     }
+
+    @GetMapping("/admin")
+    public String adminHome(Model model){
+
+        return "admin/index";
+    }
 }

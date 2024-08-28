@@ -41,6 +41,7 @@ public class SecurityConfig {
         http.authorizeRequests()
                 .mvcMatchers("/", "/member/**").permitAll()
                 .mvcMatchers("/css/**","/js/**", "/image/**").permitAll()
+                .mvcMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
 
 //        http.formLogin().disable(); // 기본 로그인 페이지 비활성화

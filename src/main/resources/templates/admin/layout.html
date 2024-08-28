@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자페이지</title>
+    <script src="https://kit.fontawesome.com/ec59e7cea5.js" crossorigin="anonymous"></script>
+    <!-- jquery CDN-->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/css/admin/index.css">
+    <script src="/js/admin/index.js"></script>
+    <th:block layout:fragment="css"></th:block>
+    <th:block layout:fragment="script"></th:block>
+</head>
+<body>
+    <div id="wrap">
+        <div th:replace="admin/side :: side"></div>
+        <div layout:fragment="body" id="main"></div>
+    </div>
+
+</body>
+</html>
