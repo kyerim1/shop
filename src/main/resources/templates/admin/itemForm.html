@@ -21,6 +21,16 @@
         </div>
 
         <div class="input-group mb-3">
+            <label class="input-group-text" th:for="itemCategory">상품상태</label>
+            <select class="form-select" th:field="*{itemCategory}">
+                <option value="PANTS">바지</option>
+                <option value="TOP">상의</option>
+                <option value="OUTER">아우터</option>
+                <option value="SHOES">신발</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
             <span class="input-group-text" >상품명</span>
             <input type="text" th:field="*{itemName}" class="form-control" placeholder="상품명을 입력하세요">
         </div>

@@ -1,5 +1,6 @@
 package com.shop.Dto;
 
+import com.shop.constant.ItemCategory;
 import com.shop.constant.ItemSellStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,7 @@ public class ItemForm {
     @NotBlank(message = "상품상세 내용은 필수입니다.")
     private String itemDetail;
 
+    private ItemCategory itemCategory;
     private ItemSellStatus itemSellStatus;
 
     private List<ItemImgDto> itemImgDtoList = new ArrayList<>();
