@@ -1,10 +1,10 @@
 $(window).resize(function() {
     var windowWidth = $(window).width();
     if( windowWidth<=850){
-        $(this).css("color","#000");
+        $("#menuSlideIcon").css("color","#000");
         $("#side").addClass("toggle");
     }else{
-        $(this).css("color","#fff");
+        $("#menuSlideIcon").css("color","#fff");
         $("#side").removeClass("toggle");
     }
 });
