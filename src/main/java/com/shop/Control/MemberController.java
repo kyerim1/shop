@@ -4,6 +4,7 @@ import com.shop.Dto.MemberForm;
 import com.shop.Dto.MemberLogin;
 import com.shop.Service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,11 +20,12 @@ import javax.validation.Valid;
 public class MemberController {
 
     private final MemberService memberService;
+    private final PasswordEncoder passwordEncoder;
 
     // 로그인 페이지 요청
     @GetMapping("/signIn")
     public String loginPage(Model model){
-        model.addAttribute("memberLogin",new MemberLogin());
+
         return "member/login";
     }
 
@@ -42,7 +44,7 @@ public class MemberController {
             return "member/join";
         }
         try {
-            memberService.saveMember(memberForm);
+            memberService.saveMember(memberForm, passwordEncoder);
         }catch(IllegalStateException e1){
             bindingResult.rejectValue("userId","error.memberForm", e1.getMessage());
             return "member/join";
@@ -53,5 +55,16 @@ public class MemberController {
 
         return "redirect:/member/signIn";
     }
+
+    // 로그인 실패 - 아이디나 비밀번호 틀린경우
+    @GetMapping("/signIn/error")
+    public String loginFail(Model model){
+        model.addAttribute("loginFailMsg",
+                "아이디 또는 비밀번호가 올바르지 않습니다.");
+        return "member/login";
+    }
+
+
+
 
 }

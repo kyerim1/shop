@@ -1,9 +1,11 @@
 package com.shop.Dto;
 
 import com.shop.Entity.Member;
+import com.shop.constant.Role;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -27,7 +29,7 @@ public class MemberForm {
     private int zipCode;  // 우편번호
 
     //DTO -> Entity  회원가입 시 동작메서드
-    public Member createEntity(){
+    public Member createEntity(PasswordEncoder passwordEncoder){
         Member member = new Member();
         member.setName( this.name );
         member.setEmail( this.email );
@@ -35,7 +37,9 @@ public class MemberForm {
         member.setZipCode( this.zipCode );
         member.setAddr1( this.addr1);
         member.setAddr2( this.addr2 );
-        member.setPassword( this.password );
+        member.setRole(Role.USER);
+        String pw = passwordEncoder.encode( this.password);
+        member.setPassword( pw );
         return member;
     }
 
