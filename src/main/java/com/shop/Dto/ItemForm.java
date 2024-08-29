@@ -1,9 +1,11 @@
 package com.shop.Dto;
 
+import com.shop.Entity.Item;
 import com.shop.constant.ItemCategory;
 import com.shop.constant.ItemSellStatus;
 import lombok.Getter;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -34,4 +36,17 @@ public class ItemForm {
     private List<Long> itemImgIds = new ArrayList<>();
     private LocalDateTime regTime; //최초 등록 일
     private LocalDateTime updateTime; //수정 일
+
+    private static ModelMapper mapper = new ModelMapper();
+
+    //DTO -> ENtity
+    public Item createEntity(){
+        return mapper.map(this, Item.class);
+    }
+
+    // Entity - > DTO
+    public static ItemForm of(Item item){
+        return mapper.map(item , ItemForm.class);
+    }
+
 }
