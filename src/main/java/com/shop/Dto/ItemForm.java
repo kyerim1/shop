@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.modelmapper.ModelMapper;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +21,10 @@ public class ItemForm {
     @NotBlank(message = "상품명은 필수 입니다.")
     private String itemName;
 
-    @NotBlank(message = "가격은 필수 입력 입니다.")
+    @NotNull(message = "가격은 필수 입력 입니다.")
     private Integer price;
 
-    @NotBlank(message="재고는 필수 입력입니다.")
+    @NotNull(message="재고는 필수 입력입니다.")
     private Integer stock;
 
     @NotBlank(message = "상품상세 내용은 필수입니다.")
