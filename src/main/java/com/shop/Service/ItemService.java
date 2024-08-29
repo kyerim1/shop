@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,5 +37,23 @@ public class ItemService {
             //업로드및 데이터베이스 저장하기 위해 itemimgservie클래스의 메서드호출
             itemImgService.saveItemImg( itemImg, multipartFileList.get(i) );
         }
+    }
+
+    public List<ItemForm> getAdminItemPage() {
+            List<Item> itemList = itemRepository.findAll();
+            List<ItemForm> itemFormList= new ArrayList<>();
+            for(Item item : itemList){
+                itemFormList.add(ItemForm.of(item));
+            }
+
+            return itemFormList;
+    }
+
+    public ItemForm getItem(Long id) {
+        Item item = itemRepository.findById( id ).orElse(null);
+        if( item == null){
+            return new ItemForm();
+        }
+        return ItemForm.of(item);
     }
 }
