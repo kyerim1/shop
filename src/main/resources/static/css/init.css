@@ -79,18 +79,22 @@ a{
 .searchBox{
     display:flex;
     align-items: center;
-    column-gap: 10px;
+    column-gap: 10px;position:relative;
 }
 #keyword{
     border:0;
     outline: none;
     width:0;
     border-bottom: 1px solid #555;
-    transition:all 1s;
+    transition:width 1s ease;
+    position:absolute;
+    left:0;
+    opacity: 0;right: 0;
 }
 #keyword.active{
     width:200px;
     padding-left:10px;
+    left: auto;
 }
 .signInBox{
     font-size:22px;
