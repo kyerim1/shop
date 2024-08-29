@@ -39,7 +39,7 @@ public class SecurityConfig {
 
         //인가,인증 ,  누구든 접근 허용주소 설정
         http.authorizeRequests()
-                .mvcMatchers("/", "/member/**").permitAll()
+                .mvcMatchers("/", "/member/**","/images/**").permitAll()
                 .mvcMatchers("/css/**","/js/**", "/image/**").permitAll()
                 .mvcMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
