@@ -2,6 +2,7 @@ package com.shop.Service;
 
 import com.shop.Dto.CartItemDto;
 import com.shop.Entity.Cart;
+import com.shop.Entity.CartItem;
 import com.shop.Entity.Item;
 import com.shop.Entity.Member;
 import com.shop.Repository.CartItemRepository;
@@ -37,8 +38,18 @@ public class CartService {
         }
         
         // 장바구니에 상품 을 담기
+        // 전에 동일한 상품을 장바구니에 담았다면 수량 증가해야 되고, 장바구니에 없다면 신규저장
+        CartItem cartItem =
+                cartItemRepository.findByCartIdAndItemId(cart.getId(),item.getId());
+        if( cartItem != null) { // 기존 상품의 수량 증가
+            cartItem.addQuantity( cartItemDto.getQuantity() );
+            return cartItem.getId();
+        }else{ // 장바구니에 새상품 담을때!!!
+            CartItem newCartItem =
+                    CartItem.createCartItem(cart, item, cartItemDto.getQuantity());
+            cartItemRepository.save(newCartItem);
+            return newCartItem.getId();
+        }
 
-
-        return 0L;
     }
 }
