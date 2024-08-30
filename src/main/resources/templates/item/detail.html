@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragment/main}">
+<head>
+    <meta charset="UTF-8">
+    <title layout:fragment="title"></title>
+
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" href="/css/detail.css">
+    </th:block>
+    <th:block layout:fragment="script">
+        <script src="/js/detail.js"></script>
+    </th:block>
+</head>
+<div layout:fragment="main" id="main">
+    <div id="detailWrap">
+        <div id="detailTop">
+            <div id="top-left">
+                <div class="bigImgWrap">
+                    <div class="bigImg">
+                        <img src="">
+                    </div>
+                </div>
+                <div class="smallImgsWrap">
+                    <ul>
+                        <li><img src=""></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="top-right">
+                <div class="itemValue">
+                    <h2 class="itemName"></h2>
+                    <div class="itemMoney"></div>
+                    <div class="itemBtn">
+                        <button class="cart-button">CART</button>
+                        <button class="order-button">ORDER</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="detailBody">
+            <div class="item_comment"></div>
+            <div class="item_imgs">
+                <img src="">
+            </div>
+        </div>
+    </div>
+</div>
+</html>

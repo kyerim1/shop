@@ -83,7 +83,8 @@ public class ItemService {
         if( item == null){
             return new ItemForm();
         }
-        return ItemForm.of(item);
+        ItemForm itemForm = getItem( item );
+        return itemForm;
     }
 
     // 메인페이지 보여줄 상품 8개 선택하기위한 메서드
