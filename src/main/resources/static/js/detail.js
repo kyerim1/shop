@@ -18,4 +18,23 @@ $(function() {
     $bigImgWrap.on('mouseout', function() {
         $bigImgWrap.removeClass('zoom');
     });
+
+
+
+    // 단가를 데이터 속성에서 가져오기
+        const unitPrice = parseFloat($('.itemMoney').data('price'));
+
+        function updateTotalPrice() {
+            const quantity = parseInt($('#quantity').val(), 10);
+            const totalPrice = unitPrice * quantity;
+            $('#totalPrice').text(`${totalPrice.toLocaleString()}원`);
+        }
+
+        // 수량이 변경될 때마다 총 결제 금액 업데이트
+        $('#quantity').on('input', updateTotalPrice);
+
+        // 페이지 로드 시 총 결제 금액 초기화
+        updateTotalPrice();
+
+
 });

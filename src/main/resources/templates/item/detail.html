@@ -14,24 +14,39 @@
     </th:block>
 </head>
 <div layout:fragment="main" id="main">
+
+    <input type="hidden" id="itemId" th:value="${item.id}">
+
     <div id="detailWrap">
         <div id="detailTop">
             <div id="top-left">
                 <div class="bigImgWrap">
                     <div class="bigImg">
-                        <img src="">
+                        <img th:src="${item.itemImgDtoList.get(0).imgUrl}">
                     </div>
                 </div>
                 <div class="smallImgsWrap">
                     <ul>
-                        <li><img src=""></li>
+                        <li th:each="img : ${item.itemImgDtoList}"
+                        th:if="${img.imgUrl != null and img.imgUrl.trim().length() > 0}">
+                            <img th:src="${img.imgUrl}">
+                        </li>
                     </ul>
                 </div>
             </div>
             <div id="top-right">
                 <div class="itemValue">
-                    <h2 class="itemName"></h2>
-                    <div class="itemMoney"></div>
+                    <h2 class="itemName" th:text="${item.itemName}"></h2>
+                    <div th:data-price="${item.price}" class="itemMoney" th:text="${#numbers.formatInteger(item.price,0,'COMMA') + ' 원'}"></div>
+                    <div class="purchase">
+                        <div class="quantity-selector">
+                            <label for="quantity">수량:</label>
+                            <input type="number" id="quantity" value="1" min="1">
+                        </div>
+                        <div class="total-price">
+                            <p>결제 금액: <span id="totalPrice"></span></p>
+                        </div>
+                    </div>
                     <div class="itemBtn">
                         <button class="cart-button">CART</button>
                         <button class="order-button">ORDER</button>
@@ -40,9 +55,13 @@
             </div>
         </div>
         <div id="detailBody">
-            <div class="item_comment"></div>
+            <div class="item_comment">
+                <pre th:text="${item.itemDetail}"></pre>
+            </div>
             <div class="item_imgs">
-                <img src="">
+                <img th:each="img : ${item.itemImgDtoList}"
+                     th:if="${img.imgUrl != null and img.imgUrl.trim().length() > 0}"
+                     th:src="${img.imgUrl}">
             </div>
         </div>
     </div>
