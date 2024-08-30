@@ -7,6 +7,7 @@ import com.shop.Entity.Item;
 import com.shop.Entity.ItemImg;
 import com.shop.Repository.ItemImgRepository;
 import com.shop.Repository.ItemRepository;
+import com.shop.constant.ItemCategory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -113,4 +114,20 @@ public class ItemService {
     }
 
 
+    public List<ItemForm> getItemList(String category) {
+        List<ItemForm> itemFormList = new ArrayList<>();
+        // valueOf는 enum에서 상수로 변환  단, 일치해야정상동작, 불일치면 예외발생
+        ItemCategory itemCategory = ItemCategory.valueOf(category);
+
+        List<Item> itemList = itemRepository.findByItemCategory(itemCategory);
+
+        // 각 상품들의 이미지들을 가져와서  LIST에 담고  itemFrom에 저장 하기
+        //  itemForm 객체를 List<ItemForm> 컬렉션에 저장
+        for( Item item : itemList){
+            ItemForm itemForm = getItem(item);
+            itemFormList.add(itemForm);
+        }
+
+        return itemFormList;
+    }
 }

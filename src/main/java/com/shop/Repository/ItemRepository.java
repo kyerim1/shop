@@ -1,6 +1,7 @@
 package com.shop.Repository;
 
 import com.shop.Entity.Item;
+import com.shop.constant.ItemCategory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,6 @@ public interface ItemRepository extends JpaRepository<Item,Long> {
     List<Item> findRandomItem(@Param("limit") int limit);
 
     List<Item> findAllByOrderByRegTimeDesc(Pageable pageable);
+
+    List<Item> findByItemCategory(ItemCategory itemCategory);
 }
