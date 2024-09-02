@@ -20,6 +20,7 @@
         <table id="cartTable">
             <thead>
             <tr>
+                <th>선택</th>
                 <th>상품 이미지</th>
                 <th>상품 이름</th>
                 <th>단가</th>
@@ -30,13 +31,14 @@
             </thead>
             <tbody>
             <tr>
+                <td><input type="checkbox" class="itemCheckbox" checked></td>
                 <td><img src="" ></td>
                 <td></td>
                 <td class="price"></td>
                 <td class="quantity">
                     <input type="number" id="" min="1" th:value="" th:data-price="">
                 </td>
-                <td class=""></td>
+                <td class="subtotal"></td>
                 <td><button class="removeButton">삭제</button></td>
             </tr>
             </tbody>

@@ -37,8 +37,12 @@ h2 {
     text-align:center;
 }
 #cartTable img {
-    max-width: 100px;
-    height: auto;
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.itemCheckbox {
+    margin-right: 10px;
 }
 
 #cartTotal {
