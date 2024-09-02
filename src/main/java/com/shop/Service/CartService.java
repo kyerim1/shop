@@ -1,6 +1,7 @@
 package com.shop.Service;
 
 import com.shop.Dto.CartItemDto;
+import com.shop.Dto.CartListDto;
 import com.shop.Entity.Cart;
 import com.shop.Entity.CartItem;
 import com.shop.Entity.Item;
@@ -12,6 +13,9 @@ import com.shop.Repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -51,5 +55,23 @@ public class CartService {
             return newCartItem.getId();
         }
 
+    }
+
+    // 장바구니  목록 보기
+    public List<CartListDto> getCartList(String name) {
+        List<CartListDto> cartListDtoList = new ArrayList<>();
+
+        // 현재 로그인한 회원 계정명으로 회원 번호(primary key로지정된 컬럼- member_id)
+        // 구해야한다.
+        Member member = memberRepository.findByUserId(name);
+        // 로그인한 회원의 장바구니 번호 가져오기
+        Cart cart = cartRepository.findByMemberId( member.getId() );
+        // 장바구니에 상품을 담지 않은 , 장바구니가 없는 회원
+        if( cart == null) return cartListDtoList;
+
+        //현재 로그인한 회원의 장바구니 번호에 맞는 장바구니 상품 가져오
+        cartListDtoList = cartItemRepository.findList( cart.getId() );
+
+        return cartListDtoList;
     }
 }

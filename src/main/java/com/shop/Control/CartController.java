@@ -1,13 +1,16 @@
 package com.shop.Control;
 
 import com.shop.Dto.CartItemDto;
+import com.shop.Dto.CartListDto;
 import com.shop.Service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +23,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CartController {
     private final CartService cartService;
+
+    //장바구니 아이콘클릭시 - 내장바구니 목록 보기
+    @GetMapping("/cart/list")
+    public String cartList(Model model, Principal principal){
+        // 스프링 시큐리티 사용시 현재 로그인한 계정명은 Principal을 통해서
+        //받아 올 수 있다.
+        List<CartListDto> cartListDtoList = cartService.getCartList( principal.getName());
+        model.addAttribute( "cartList" ,cartListDtoList);
+        return "cart/cartList";
+    }
+
 
     //장바구니 버튼 클릭시 json 값 받기
     @PostMapping("/cart")

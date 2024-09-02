@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragment/main}">
+<head>
+    <meta charset="UTF-8">
+    <title layout:fragment="title"></title>
+
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" href="/css/cart.css">
+    </th:block>
+    <th:block layout:fragment="script">
+        <script src="/js/cart.js"></script>
+    </th:block>
+</head>
+<div layout:fragment="main" id="main">
+
+    <h2>장바구니</h2>
+    <div id="cartList">
+        <table id="cartTable">
+            <thead>
+            <tr>
+                <th>상품 이미지</th>
+                <th>상품 이름</th>
+                <th>단가</th>
+                <th>수량</th>
+                <th>합계</th>
+                <th>삭제</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><img src="" ></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <input type="number" id="" min="1" th:value="" th:data-price="">
+                </td>
+                <td></td>
+                <td><button class="removeButton">삭제</button></td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="cartTotal">
+            <p>총 결제 금액: <span id="totalPrice">0원</span></p>
+            <button id="checkoutButton">결제하기</button>
+        </div>
+    </div>
+
+
+</div>
+</html>
