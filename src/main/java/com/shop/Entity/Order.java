@@ -12,6 +12,7 @@ import java.util.List;
 @Entity
 @Setter
 @Getter
+@Table(name="orders")
 public class Order extends Base{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

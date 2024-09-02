@@ -69,3 +69,30 @@ h2 {
 #checkoutButton:hover {
     background-color: #218838;
 }
+
+
+.tab-menu {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px; /* 탭과 제목 사이의 여백 */
+    border-bottom: 2px solid #ddd;
+}
+
+.tab {
+    padding: 10px 20px;
+    margin-right: 10px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    border-bottom: 3px solid transparent;
+}
+
+.tab:hover {
+    color: #007bff;
+    border-color: #007bff;
+}
+
+.tab.active {
+    color: #007bff;
+    border-color: #007bff;
+}

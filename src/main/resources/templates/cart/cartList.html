@@ -13,10 +13,16 @@
         <link rel="stylesheet" href="/css/cart.css">
     </th:block>
     <th:block layout:fragment="script">
-        <script src="/js/cart.js"></script>
+
     </th:block>
 </head>
 <div layout:fragment="main" id="main">
+    <script src="/js/cart.js"></script>
+
+    <div class="tab-menu">
+        <a href="/cart/list" class="tab active">장바구니</a>
+        <a href="/orderList" class="tab">구매내역</a>
+    </div>
 
     <h2>장바구니</h2>
     <div id="cartList">

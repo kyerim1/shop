@@ -3,6 +3,7 @@ package com.shop.Service;
 import com.shop.Dto.CartItemDto;
 import com.shop.Dto.CartListDto;
 import com.shop.Dto.CartOrderDto;
+import com.shop.Dto.OrderDto;
 import com.shop.Entity.Cart;
 import com.shop.Entity.CartItem;
 import com.shop.Entity.Item;
@@ -28,6 +29,7 @@ public class CartService {
     private final CartItemRepository cartItemRepository;
     private final ItemRepository itemRepository;
     private final MemberRepository memberRepository;
+    private final OrderService orderService;
 
     //장바구니 - CART 버튼 클릭시 - 장바구니 담기
     public Long addCart(CartItemDto cartItemDto, String userId){
@@ -95,8 +97,27 @@ public class CartService {
         }
     }
 
+
     // 장바구니에서 선택한 상품 주문하기
     public Long orderCartItem(List<CartOrderDto> cartOrderDtoList, String name) {
-
+        List<OrderDto> orderDtos = new ArrayList<>();
+        //선택한 상품을 구매내역에 저장하기 위해 OrderDto에 저장한다.
+        for( CartOrderDto cartOrderDto : cartOrderDtoList){
+            CartItem cartItem =
+                    cartItemRepository.findById(cartOrderDto.getCartItemId()).get();
+            OrderDto orderDto =new OrderDto();
+            orderDto.setItemId(cartItem.getItem().getId());
+            orderDto.setQuantity( cartItem.getQuantity() );
+            orderDtos.add(orderDto);
+        }
+        // 선택한 상품들을 구매내역 테이블에 저장하기
+        Long orderId = orderService.orders(orderDtos, name);
+        // 장바구니 상품을 구매하였으니까 장바구니에서는 삭제
+        for( CartOrderDto cartOrderDto : cartOrderDtoList){
+            CartItem cartItem =
+                    cartItemRepository.findById( cartOrderDto.getCartItemId()).get();
+            cartItemRepository.delete(cartItem);
+        }
+        return orderId;
     }
 }
