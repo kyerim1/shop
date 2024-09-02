@@ -2,6 +2,7 @@ package com.shop.Service;
 
 import com.shop.Dto.CartItemDto;
 import com.shop.Dto.CartListDto;
+import com.shop.Dto.CartOrderDto;
 import com.shop.Entity.Cart;
 import com.shop.Entity.CartItem;
 import com.shop.Entity.Item;
@@ -14,8 +15,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -79,6 +82,21 @@ public class CartService {
     public void updateCartItemQuantity(Long cartItemId, int quantity, String name) {
         CartItem cartItem = cartItemRepository.findById(cartItemId).get();
         cartItem.updateQuantity( quantity);
+
+    }
+
+    // 장바구니 목록에서 상품을 삭제 하기 위한 메서드 - 테이블에서 제거
+    @Transactional
+    public void deleteCartItem(Long cartItemId) {
+        Optional<CartItem> optionalItem = cartItemRepository.findById(cartItemId);
+        if (optionalItem.isPresent()) {
+            CartItem item = optionalItem.get();
+            cartItemRepository.deleteById(cartItemId);
+        }
+    }
+
+    // 장바구니에서 선택한 상품 주문하기
+    public Long orderCartItem(List<CartOrderDto> cartOrderDtoList, String name) {
 
     }
 }

@@ -46,8 +46,81 @@ $(function() {
     $('#cartTable').on('click', '.removeButton', function() {
         $(this).closest('tr').remove();
         calculateTotal();
+        //서버에 삭제요청을 위한 함수 호출
+        var cartItemId = $(this).parent().parent().find("input[name=cartChk]").val();
+        deleteCartItem(cartItemId);
     });
+
+    // 결제하기 버튼 클릭시
+    $("#checkoutButton").click(function(){
+        var token = $("meta[name=_csrf]").attr("content");
+        var header = $("meta[name=_csrf_header]").attr("content");
+
+        var url = "/cart/order";
+
+        var ciList = new Array();
+        $("input[name=cartChk]:checked").each(function(){
+            var cartItemId = $(this).val();
+            ciList.push( { cartItemId : cartItemId } );
+        });
+
+        var param = JSON.stringify( {cartOrderDtoList : ciList} );
+
+        $.ajax({
+            url : url,
+            type : "POST",
+            data : param,
+            dataType : "json",
+            contentType : "application/json",
+            cache : false,
+            beforeSend : function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
+            success : function(result , status){
+                alert("주문 완료");
+                location.href="/orderList";
+            },
+            error : function(jqXHR, status , error){
+                if(jqXHR.status == "200")
+                    alert("로그인후 이용해주세요");
+                else
+                    alert(jqXHR.responseText);
+            }
+        });
+    });
+
+
 });
+
+// 장바구니에 담겨있는 상품 삭제 요청
+function deleteCartItem( cartItemId ){
+    var token = $("meta[name=_csrf]").attr("content");
+    var header = $("meta[name=_csrf_header]").attr("content");
+
+    var url = "/cart/delete/"+cartItemId;
+
+    $.ajax({
+        url : url,
+        type : "DELETE",
+        dataType : "json",
+        cache : false,
+        beforeSend : function(xhr){
+            xhr.setRequestHeader(header, token);
+        },
+        success : function( result, status){
+            console.log("장바구니에서 상품 삭제 성공");
+        },
+        error : function(jqXHR, status, error){
+            if(jqXHR.status == "200")
+                alert("로그인 후 이용해주세요");
+            else{
+                alert( jqXHR.responseJSON.message);
+            }
+        }
+     });
+}
+
+
 
 // 수량 변경 서버에 요청
 function updateItemQuantity(cartItemId, quantity){

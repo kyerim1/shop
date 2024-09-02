@@ -2,6 +2,7 @@ package com.shop.Control;
 
 import com.shop.Dto.CartItemDto;
 import com.shop.Dto.CartListDto;
+import com.shop.Dto.CartOrderDto;
 import com.shop.Service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,31 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CartController {
     private final CartService cartService;
+
+    // 장바구니에서 상품 주문시 - 결제하기 버튼 클릭시
+    @PostMapping("/cart/order")
+    public @ResponseBody ResponseEntity orderCartItem(
+            @RequestBody CartOrderDto cartOrderDto, Principal principal){
+
+        Long orderId =
+                cartService.orderCartItem( cartOrderDto.getCartOrderDtoList(),
+                        principal.getName());
+        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
+    }
+
+
+
+    //장바구니 목록에서 상품 삭제
+    @DeleteMapping("/cart/delete/{cartItemId}")
+    public @ResponseBody ResponseEntity deleteCartItem(
+            @PathVariable("cartItemId") Long cartItemId){
+        try {
+            cartService.deleteCartItem(cartItemId);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<Long>(cartItemId, HttpStatus.OK);
+    }
 
 
     //수량 변경 요청
