@@ -3,7 +3,7 @@ $(function() {
     function calculateSubtotal() {
         $('#cartTable tbody tr').each(function() {
             var $row = $(this);
-            var price = parseFloat($row.find('.price').text());
+            var price = parseFloat($row.find('.price').text().replace('원', '').replace(/,/g, ''), 10);
             var quantity = parseInt($row.find('input[type="number"]').val());
             var subtotal = price * quantity;
             $row.find('.subtotal').text(subtotal + '원');
@@ -27,6 +27,10 @@ $(function() {
     $('#cartTable').on('input', 'input[type="number"]', function() {
         calculateSubtotal();
         calculateTotal();
+        var cartItemId = $(this).parent().parent().find("input[name=cartChk]").val();
+        var quantity = $(this).val(); // 수량
+
+        updateItemQuantity( cartItemId , quantity ); // cartItem의 번호, 변경 수량
     });
 
     // 체크박스 선택 시 총 결제 금액 업데이트
@@ -44,3 +48,34 @@ $(function() {
         calculateTotal();
     });
 });
+
+// 수량 변경 서버에 요청
+function updateItemQuantity(cartItemId, quantity){
+    var token = $("meta[name=_csrf]").attr("content");
+    var header = $("meta[name=_csrf_header]").attr("content");
+
+    // 변경 사항 주소와 파라미터로 요청
+    var url = "/cart/update/"+cartItemId+ "?quantity="+quantity;
+
+    $.ajax({
+        url : url,
+        type : "PATCH",
+        dataType : "json",
+        cache : false,
+        beforeSend : function(xhr){
+            xhr.setRequestHeader(header, token);
+        },
+        success : function(result , status){
+            console.log("수량 변경 성공");
+        },
+        error : function(jqXHR , status, error){
+            if(jqXHR.status =='200'){
+                alert("로그인 후 이용해주세요");
+            }else{
+                alert(jqXHR,responseJSON.message);
+            }
+        }
+
+     });
+
+}

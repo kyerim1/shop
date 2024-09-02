@@ -74,4 +74,11 @@ public class CartService {
 
         return cartListDtoList;
     }
+
+    // 수량 변경 요청
+    public void updateCartItemQuantity(Long cartItemId, int quantity, String name) {
+        CartItem cartItem = cartItemRepository.findById(cartItemId).get();
+        cartItem.updateQuantity( quantity);
+
+    }
 }

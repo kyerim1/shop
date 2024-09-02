@@ -10,10 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -23,6 +20,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CartController {
     private final CartService cartService;
+
+
+    //수량 변경 요청
+    @PatchMapping("/cart/update/{cartItemId}")
+    public @ResponseBody ResponseEntity updateCartItem(
+            @PathVariable("cartItemId") Long cartItemId,
+            @RequestParam("quantity") int quantity , Principal principal){
+        cartService.updateCartItemQuantity( cartItemId, quantity, principal.getName());
+        return new ResponseEntity<Long>(cartItemId,HttpStatus.OK);
+    }
+
 
     //장바구니 아이콘클릭시 - 내장바구니 목록 보기
     @GetMapping("/cart/list")
