@@ -27,7 +27,15 @@ h2 {
 #cartTable th {
     background-color: #f4f4f4;
 }
-
+#cartTable td:nth-child(4){
+    width:100px;
+}
+#cartTable td input{
+    border:0;
+    border-bottom:1px solid black;
+    font-size:17px;
+    text-align:center;
+}
 #cartTable img {
     max-width: 100px;
     height: auto;
