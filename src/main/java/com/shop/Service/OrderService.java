@@ -5,6 +5,7 @@ import com.shop.Dto.OrderHistDto;
 import com.shop.Dto.OrderItemDto;
 import com.shop.Entity.*;
 import com.shop.Repository.*;
+import com.shop.constant.OrderStatus;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.data.domain.Page;
@@ -69,5 +70,28 @@ public class OrderService {
         }
         // 페이징을 위해 PageImpl 인터페이스로 반환
         return new PageImpl<>(orderHistDtoList, pageable, total);
+    }
+
+    //상품 상세 페이지에서 구매하기 버튼 클릭시
+    public Long itemOrder(OrderDto orderDto, String userId) {
+        Member member = memberRepository.findByUserId(userId);
+
+        Item item = itemRepository.findById(orderDto.getItemId()).get();
+
+        List<OrderItem> orderItemList = new ArrayList<>();
+        OrderItem orderItem =
+                OrderItem.createOrderItem(item, orderDto.getQuantity());
+        orderItemList.add(orderItem);
+
+        Order order = Order.createOrder(member, orderItemList);
+        orderRepository.save(order);
+        return order.getId();
+    }
+
+    //주문 취소
+    public void cancelOrder(Long orderId) {
+        Order order = orderRepository.findById( orderId ).get();
+        order.setOrderStatus( OrderStatus.CANCEL );
+
     }
 }
