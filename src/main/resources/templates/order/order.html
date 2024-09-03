@@ -36,9 +36,9 @@
                         <div class="details">
                             <p class="product-name">상품명: <span th:text="${item.itemName}"></span></p>
                             <div class="price-info">
-                                <p>단가: <span th:text="${item.price}"></span></p>
-                                <p>수량: <span th:text="${item.quantity}"></span></p>
-                                <p class="total-price">결제 금액: <span th:text="${item.orderPrice}"></span></p>
+                                <p>단가: <span th:text="${#numbers.formatInteger(item.price,0,'COMMA')+' 원'}"></span></p>
+                                <p>수량: <span th:text="${#numbers.formatInteger(item.quantity,0,'COMMA')}"></span></p>
+                                <p class="total-price">결제 금액: <span th:text="${#numbers.formatInteger(item.orderPrice,0,'COMMA')+' 원'}"></span></p>
                             </div>
 
                         </div>
