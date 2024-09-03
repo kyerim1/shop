@@ -1,6 +1,7 @@
 package com.shop.Service;
 
 import com.shop.Dto.OrderDto;
+import com.shop.Dto.OrderHistDto;
 import com.shop.Entity.Item;
 import com.shop.Entity.Member;
 import com.shop.Entity.Order;
@@ -8,6 +9,8 @@ import com.shop.Entity.OrderItem;
 import com.shop.Repository.*;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,5 +42,8 @@ public class OrderService {
         Order order = Order.createOrder(member, orderItemList);
         orderRepository.save(order);
         return order.getId();
+    }
+
+    public Page<OrderHistDto> getOrderList(String name, Pageable pageable) {
     }
 }
