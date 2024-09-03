@@ -6,8 +6,12 @@
     <meta charset="UTF-8">
     <title layout:fragment="title"></title>
 
-    <th:block layout:fragment="css"></th:block>
-    <th:block layout:fragment="script"></th:block>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" href="/css/order.css">
+    </th:block>
+    <th:block layout:fragment="script">
+        <script src="/js/order.js"></script>
+    </th:block>
 </head>
 <div layout:fragment="main" id="main">
     <div class="tab-menu">

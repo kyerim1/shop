@@ -1,5 +1,6 @@
 package com.shop.Dto;
 
+import com.shop.Entity.Member;
 import com.shop.Entity.Order;
 import com.shop.constant.OrderStatus;
 import lombok.Getter;
@@ -17,6 +18,8 @@ public class OrderHistDto {
     private Long orderId; //주문번호
     private String orderDate; // 주문날짜
     private OrderStatus orderStatus; // 주문상태
+    private String addr; // 배송주소
+    private String toName;// 받는사람
 
     private List<OrderItemDto> orderItemDtoList = new ArrayList<>();
 
@@ -24,9 +27,11 @@ public class OrderHistDto {
         orderItemDtoList.add(orderItemDto);
     }
 
-    public OrderHistDto(Order order){
+    public OrderHistDto(Order order, Member member){
         this.orderId = order.getId();
         this.orderDate=order.getOrderDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
         this.orderStatus=order.getOrderStatus();
+        this.toName=member.getName();
+        this.addr = member.getAddr1()+" "+ member.getAddr2();
     }
 }
