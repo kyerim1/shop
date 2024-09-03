@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragment/main}">
+<head>
+    <meta charset="UTF-8">
+    <title layout:fragment="title"></title>
+
+    <th:block layout:fragment="css"></th:block>
+    <th:block layout:fragment="script"></th:block>
+</head>
+<div layout:fragment="main" id="main">
+    <div class="tab-menu">
+        <a href="/cart/list" class="tab ">장바구니</a>
+        <a href="/orderList" class="tab active">구매내역</a>
+    </div>
+    <div class="order-container">
+
+        <h2>주문 내역</h2>
+
+        <div class="order-section">
+            <h3 class="order-date"></h3>
+            <div class="order-items">
+                <div class="order-item">
+                    <div class="product-info">
+                        <img src="" alt="상품 이미지">
+                        <div class="details">
+                            <p class="product-name">상품명: <span></span></p>
+                            <div class="price-info">
+                                <p>단가: <span></span></p>
+                                <p>수량: <span></span></p>
+                                <p class="total-price">결제 금액: <span></span></p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="delivery-info">
+                    <p>배송 주소: <span></span></p>
+                    <p>받는 사람: <span></span></p>
+                </div>
+            </div>
+            <button class="cancel-button">주문 취소</button>
+        </div>
+
+
+    </div>
+</div>
+</html>
